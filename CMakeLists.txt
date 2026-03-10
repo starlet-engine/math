@@ -13,7 +13,7 @@ if(NOT TARGET ${PROJECT_NAME})
     $<BUILD_INTERFACE:${PROJECT_INC_DIR}>
     $<INSTALL_INTERFACE:include>
   )
-  target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
+  target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_20)
 endif()
 
 option(BUILD_TESTS "Build unit tests" OFF)
