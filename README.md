@@ -24,15 +24,15 @@ This makes it perfect for learning, experimentation, but not a drop-in replaceme
     `pi`, `radians()`, `degrees()`
 - **Starlet** Project Constants
 
-
-<br/>
-
-
 ## Prerequisites
 - C++20 or later
-- CMake 3.20+
+- One of the following Build Systems,
+    - CMake 3.20+
+    - Meson 1.1+
 
 ## Using as a Dependency
+
+### CMake
 ```cmake
 include(FetchContent)
 
@@ -45,25 +45,32 @@ FetchContent_MakeAvailable(starlet_math)
 target_link_libraries(app_name PRIVATE starlet_math)
 ```
 
-<br/>
+### Meson
+```python
+starlet_math = subproject('starlet_math')
+starlet_math_dep = starlet_math.get_variable('starlet_math_dep')
+```
 
 ## Building and Testing
 ```bash
 # 1. Clone starlet-math
 git clone https://github.com/masonlet/starlet-math.git
 cd starlet-math
-
-# 2. Create a Build Directory and Generate Build Files
-mkdir build
-cd build
-cmake -DBUILD_TESTS=ON ..
-
-# 3. Build and run tests
-cmake --build .
-ctest
 ```
 
-<br/>
+### CMake
+```bash
+cmake -B build -DBUILD_TESTS=ON
+cmake --build build
+ctest --test-dir build
+```
+
+### Meson
+```bash
+meson setup build -Dbuild_tests=true
+meson compile -C build
+meson test -C build
+```
 
 ## License
 MIT License — see [LICENSE](./LICENSE) for details.
