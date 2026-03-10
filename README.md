@@ -1,6 +1,6 @@
 # Starlet Math
 
-[![Tests](https://github.com/masonlet/starlet-math/actions/workflows/tests.yml/badge.svg)](https://github.com/masonlet/starlet-math/actions/workflows/tests.yml)
+[![Tests](https://github.com/starlet-engine/math/actions/workflows/tests.yml/badge.svg)](https://github.com/starlet-engine/math/actions/workflows/tests.yml)
 [![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://isocpp.org/std/the-standard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
@@ -37,7 +37,7 @@ This makes it perfect for learning, experimentation, but not a drop-in replaceme
 include(FetchContent)
 
 FetchContent_Declare(starlet_math
-  GIT_REPOSITORY https://github.com/masonlet/starlet-math.git 
+  GIT_REPOSITORY https://github.com/starlet-engine/math.git 
   GIT_TAG main
 )
 FetchContent_MakeAvailable(starlet_math)
@@ -46,15 +46,20 @@ target_link_libraries(app_name PRIVATE starlet_math)
 ```
 
 ### Meson
+> **Note:** Meson does not fetch dependencies automatically. Add the [`starlet_math.wrap`](./subprojects/starlet_math.wrap) file to your project's `subprojects` directory.
+
+In your `meson.build`:
+
 ```python
 starlet_math = subproject('starlet_math')
 starlet_math_dep = starlet_math.get_variable('starlet_math_dep')
+executable('app_name', 'main.cpp', dependencies: starlet_math_dep)
 ```
 
 ## Building and Testing
 ```bash
 # 1. Clone starlet-math
-git clone https://github.com/masonlet/starlet-math.git
+git clone https://github.com/starlet-engine/math.git
 cd starlet-math
 ```
 
