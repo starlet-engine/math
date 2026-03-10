@@ -46,9 +46,14 @@ target_link_libraries(app_name PRIVATE starlet_math)
 ```
 
 ### Meson
+> **Note:** Meson does not fetch dependencies automatically. Add the [`starlet_math.wrap`](./subprojects/starlet_math.wrap) file to your project's `subprojects` directory.
+
+In your `meson.build`:
+
 ```python
 starlet_math = subproject('starlet_math')
 starlet_math_dep = starlet_math.get_variable('starlet_math_dep')
+executable('app_name', 'main.cpp', dependencies: starlet_math_dep)
 ```
 
 ## Building and Testing
